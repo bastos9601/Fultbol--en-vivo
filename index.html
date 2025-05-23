@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fútbol Peruano en Vivo</title>
+  <link rel="stylesheet" href="stile.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Fútbol Peruano En Vivo</div>
+    <nav>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=liga1max')">Liga1 Max</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=movistar')">M Deportes</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=golperu')">GolPerú</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports')">Directv Sports</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports2')">Directv Sports2</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports+')">Directv Sports+</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn')">ESPN</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn2')">ESPN2</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn3')">ESPN3</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports')">Fox Sports</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports2')">Fox Sports2</a>
+      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports3')">Fox Sports3</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Bienvenido a la página de Streams de Fútbol</h1>
+    <p>Haz clic en un canal para ver la transmisión en vivo.</p>
+
+    <div class="video-container">
+      <iframe
+        id="streamFrame"
+        src=""
+        allow="fullscreen; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="controls">
+      <button onclick="fullscreen()">Pantalla Completa</button>
+    </div>
+  </main>
+
+  <script>
+    function cargarCanal(url) {
+      document.getElementById("streamFrame").src = url;
+    }
+
+    function fullscreen() {
+      const iframe = document.getElementById("streamFrame");
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
