@@ -9,11 +9,11 @@
 </head>
 <body>
   <header>
-  <div class="top-bar">
-    <div class="logo">⚽ Fútbol  Perú</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  </div>
-  <nav class="canales">
+    <div class="top-bar">
+      <div class="logo">⚽ Fútbol Perú</div>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+    <nav class="canales">
   <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=liga1max')">
     <img src="/img/liga-max.webp" alt="Liga1 Max">
   </a>
@@ -51,8 +51,7 @@
     <img src="/img/fox sport 3.webp" alt="Fox Sports 3">
   </a>
 </nav>
-
-</header>
+  </header>
 
   <main>
     <section class="hero">
@@ -77,36 +76,43 @@
     const video = document.getElementById('videoPlayer');
 
     function cargarCanal(url) {
-  const container = document.querySelector('.video-container');
+      const container = document.querySelector('.video-container');
 
-  if (url.endsWith('.m3u8')) {
-    container.innerHTML = `<video id="videoPlayer" controls autoplay playsinline muted></video>`;
-    const video = document.getElementById('videoPlayer');
+      if (url.endsWith('.m3u8')) {
+        container.innerHTML = `<video id="videoPlayer" controls autoplay playsinline muted></video>`;
+        const video = document.getElementById('videoPlayer');
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = url;
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = url;
+        }
+
+        video.muted = true;
+        video.play().catch(err => {
+          console.warn('Autoplay fue bloqueado:', err);
+        });
+
+      } else {
+        container.innerHTML = `
+          <iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
+      }
+
+      // Ocultar menú en móviles con animación hacia arriba
+      const nav = document.querySelector('nav.canales');
+      if (window.innerWidth <= 768 && nav.classList.contains('visible')) {
+        nav.classList.add('hide-up');
+        setTimeout(() => {
+          nav.classList.remove('visible');
+          nav.classList.remove('hide-up');
+        }, 400);
+      }
     }
-
-    // Intenta forzar la reproducción
-    video.muted = true;
-    video.play().catch(err => {
-      console.warn('Autoplay fue bloqueado:', err);
-    });
-
-  } else {
-    container.innerHTML = `
-      <iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
-  }
-}
-
-
 
     function fullscreen() {
       const container = document.querySelector('.video-container');
@@ -118,9 +124,9 @@
     }
 
     function toggleMenu() {
-  const nav = document.querySelector('nav.canales');
-  nav.classList.toggle('visible');
-}
+      const nav = document.querySelector('nav.canales');
+      nav.classList.toggle('visible');
+    }
   </script>
 </body>
 </html>
