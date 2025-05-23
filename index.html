@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fútbol Peruano en Vivo</title>
   <link rel="stylesheet" href="stile.css" />
+  <link rel="manifest" href="manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('Service Worker registrado', reg))
+      .catch(err => console.error('Error al registrar SW', err));
+  }
+</script>
+
 <body>
   <header>
     <div class="top-bar">
