@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fútbol Peruano en Vivo</title>
   <link rel="stylesheet" href="stile.css" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
   <header>
-    <div class="logo">Fútbol Peruano En Vivo</div>
-    <nav>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=liga1max')">Liga1 Max</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=movistar')">M Deportes</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=golperu')">GolPerú</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports')">Directv Sports</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports2')">Directv Sports2</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports+')">Directv Sports+</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn')">ESPN</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn2')">ESPN2</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn3')">ESPN3</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports')">Fox Sports</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports2')">Fox Sports2</a>
-      <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports3')">Fox Sports3</a>
-    </nav>
-  </header>
+  <div class="top-bar">
+    <div class="logo">⚽ Fútbol Libres Perú</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+  <nav class="canales">
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=liga1max')">Liga1 Max</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=movistar')">M Deportes</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=golperu')">GolPerú</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports')">Directv Sports</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports2')">Directv Sports 2</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn')">ESPN</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn2')">ESPN2</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn3')">ESPN3</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports')">Fox Sports</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports2')">Fox Sports 2</a>
+    <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports3')">Fox Sports 3</a>
+  </nav>
+</header>
 
   <main>
-    <h1>Bienvenido a la página de Streams de Fútbol</h1>
-    <p>Haz clic en un canal para ver la transmisión en vivo.</p>
+    <section class="hero">
+      <h1>Disfruta del fútbol en vivo</h1>
+      <p>Transmisiones en directo de tus canales deportivos favoritos.</p>
+    </section>
 
     <div class="video-container">
-      <iframe
-        id="streamFrame"
-        src=""
-        allow="fullscreen; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <video id="videoPlayer" controls autoplay playsinline></video>
     </div>
 
     <div class="controls">
@@ -43,21 +43,58 @@
     </div>
   </main>
 
+  <footer>
+    <p>© 2025 Fútbol Libres Perú - Transmisiones en vivo</p>
+  </footer>
+
   <script>
+    const video = document.getElementById('videoPlayer');
+
     function cargarCanal(url) {
-      document.getElementById("streamFrame").src = url;
+  const container = document.querySelector('.video-container');
+
+  if (url.endsWith('.m3u8')) {
+    container.innerHTML = `<video id="videoPlayer" controls autoplay playsinline muted></video>`;
+    const video = document.getElementById('videoPlayer');
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
     }
 
+    // Intenta forzar la reproducción
+    video.muted = true;
+    video.play().catch(err => {
+      console.warn('Autoplay fue bloqueado:', err);
+    });
+
+  } else {
+    container.innerHTML = `
+      <iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
+  }
+}
+
+
+
     function fullscreen() {
-      const iframe = document.getElementById("streamFrame");
-      if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-      } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-      } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
+      const container = document.querySelector('.video-container');
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
       }
     }
+
+    function toggleMenu() {
+  const nav = document.querySelector('nav.canales');
+  nav.classList.toggle('visible');
+}
   </script>
 </body>
 </html>
