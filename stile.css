@@ -124,6 +124,28 @@ footer {
   color: #00ff99;
   cursor: pointer;
 }
+nav.canales a {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+nav.canales a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav.canales img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
