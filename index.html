@@ -167,13 +167,14 @@
     }
 
     function fullscreen() {
-      const container = document.querySelector('.video-container');
-      if (container.requestFullscreen) {
-        container.requestFullscreen();
-      } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen();
-      }
-    }
+  const container = document.querySelector('.video-container');
+  if (container.requestFullscreen) {
+    container.requestFullscreen();
+  } else if (container.webkitRequestFullscreen) {
+    container.webkitRequestFullscreen();
+  }
+}
+
 
     function activarPiP() {
       const video = document.getElementById('videoPlayer');
@@ -222,6 +223,16 @@
 
     setInterval(actualizarHora, 1000);
     actualizarHora();
+
+    document.addEventListener('fullscreenchange', () => {
+  const overlay = document.querySelector('.overlay');
+  if (document.fullscreenElement) {
+    overlay.style.display = 'flex'; // mostrar en fullscreen
+  } else {
+    overlay.style.display = 'flex'; // también visible fuera de fullscreen (opcional)
+  }
+});
+
   </script>
 </body>
 </html>
