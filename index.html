@@ -3,236 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TV DIGITAL EN VIVO</title>
+  <title>TV Digital en Vivo</title>
   <link rel="stylesheet" href="stile.css" />
-  <link rel="manifest" href="manifest.json" />
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <style>
-    .video-container video:fullscreen {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-    }
-    #nombre-canal {
-      text-align: center;
-      font-size: 1.4em;
-      margin: 10px 0;
-      color: #1db954;
-      font-weight: bold;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-  </style>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" />
 </head>
-
 <body>
   <header>
-    <div class="logo" aria-label="Logo TV Digital en Vivo" role="img">
-      <svg width="180" height="50" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" >
-        <style>
-          .text {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 700;
-            font-size: 18px;
-            fill: #1db954;
-            letter-spacing: 1px;
-          }
-          .highlight {
-            fill: #fff;
-          }
-          .play-icon {
-            fill: #1db954;
-            transition: fill 0.3s ease;
-            cursor: pointer;
-          }
-          .play-icon:hover {
-            fill: #17a64a;
-          }
-        </style>
-        <polygon class="play-icon" points="10,15 10,45 40,30" />
-        <text class="text" x="50" y="28">TV DIGITAL</text>
-        <text class="text highlight" x="50" y="50">EN VIVO</text>
-      </svg>
-    </div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-    <nav class="canales">
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV')">UTV</a>
-      <a onclick="cargarCanal('https://live-evg4.tv360.bitel.com.pe/oQNeTbDAAY1z-3ZZm8mwiA/1748226630/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV')">AMÉRICA TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV')">PANAMERICANA TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA')">LATINA</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV')">ATV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES')">FMH MOVIES</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS')">FMH KIDS</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB')">BNB</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA')">RIBEREÑA</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV')">UCAYALI TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO')">CREO LATINO</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS')">CREO LATINO KIDS</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV')">GLOBAL TV</a>
-    </nav>
+    <h1>TV Digital en Vivo</h1>
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Disfruta de TV en vivo</h1>
-      <p>Transmisiones en directo de tus canales favoritos.</p>
+    <!-- Reproductor de video -->
+    <section class="player-section">
+      <h2 id="nombre-canal">Selecciona un canal</h2>
+      <div class="video-container">
+        <div class="overlay">
+          <div class="logo-overlay" aria-label="Logo TV Digital en Vivo" role="img">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="white" width="50" height="50">
+              <path d="M592 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h224v32H160c-8.8 0-16 7.2-16 16s7.2 16 16 16h320c8.8 0 16-7.2 16-16s-7.2-16-16-16H368v-32h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM192 304V96l192 104-192 104z"/>
+            </svg>
+          </div>
+          <div id="hora-overlay" class="hora-overlay"></div>
+        </div>
+        <video id="videoPlayer" controls autoplay playsinline></video>
+      </div>
+      <div class="controls">
+        <button onclick="fullscreen()">Pantalla Completa</button>
+        <button onclick="activarPiP()">Ventana Flotante</button>
+      </div>
     </section>
 
-    <h2 id="nombre-canal">Selecciona un canal</h2>
-
-    <div class="video-container">
-      <div class="overlay">
-        <div class="logo-overlay" aria-label="Logo TV Digital en Vivo" role="img">
-          <svg width="120" height="33" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-            <style>
-              .text {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-weight: 700;
-                font-size: 12px;
-                fill: #1db954;
-                letter-spacing: 1px;
-              }
-              .highlight {
-                fill: #fff;
-              }
-              .play-icon {
-                fill: #1db954;
-              }
-            </style>
-            <polygon class="play-icon" points="10,15 10,45 40,30" />
-            <text class="text" x="50" y="28">TV DIGITAL</text>
-            <text class="text highlight" x="50" y="50">EN VIVO</text>
-          </svg>
-        </div>
-        <div id="hora-overlay" class="hora-overlay"></div>
-      </div>
-      <video id="videoPlayer" controls autoplay playsinline></video>
-    </div>
-
-    <div class="controls">
-      <button onclick="fullscreen()">Pantalla Completa</button>
-      <button onclick="activarPiP()">Ventana Flotante</button>
-    </div>
+    <!-- Tarjetas de canales -->
+    <section class="canales-grid">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV')">UTV</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV')">AMÉRICA TV</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV')">PANAMERICANA TV</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA')">LATINA</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV')">ATV</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES')">FMH MOVIES</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS')">FMH KIDS</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB')">BNB</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA')">RIBEREÑA</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV')">UCAYALI TV</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO')">CREO LATINO</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS')">CREO LATINO KIDS</div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV')">GLOBAL TV</div>
+    </section>
   </main>
 
+  <script>
+  const videoPlayer = document.getElementById("videoPlayer");
+  const nombreCanal = document.getElementById("nombre-canal");
+
+  function cargarCanal(url, nombre) {
+    if (Hls.isSupported()) {
+      if (videoPlayer.hls) {
+        videoPlayer.hls.destroy(); // elimina cualquier instancia previa
+      }
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(videoPlayer);
+      videoPlayer.hls = hls;
+    } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
+      videoPlayer.src = url;
+    }
+
+    nombreCanal.textContent = nombre;
+    videoPlayer.play(); // fuerza reproducción
+  }
+
+  function fullscreen() {
+    if (videoPlayer.requestFullscreen) {
+      videoPlayer.requestFullscreen();
+    } else if (videoPlayer.webkitRequestFullscreen) {
+      videoPlayer.webkitRequestFullscreen();
+    } else if (videoPlayer.msRequestFullscreen) {
+      videoPlayer.msRequestFullscreen();
+    }
+  }
+
+  function activarPiP() {
+    if (document.pictureInPictureEnabled && !videoPlayer.disablePictureInPicture) {
+      videoPlayer.requestPictureInPicture().catch(console.error);
+    }
+  }
+
+  // Mostrar hora
+  const horaOverlay = document.getElementById("hora-overlay");
+  setInterval(() => {
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, '0');
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    horaOverlay.textContent = `${horas}:${minutos}`;
+  }, 1000);
+</script>
+
+<!-- Asegúrate de incluir HLS.js desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+
   <footer>
-    <p>© 2025 TV DIGITAL EN VIVO - Transmisiones en vivo</p>
+    <p>&copy; 2024 TV Digital en Vivo</p>
   </footer>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('Service Worker registrado', reg))
-        .catch(err => console.error('Error al registrar SW', err));
-    }
-
-    function cargarCanal(url, nombre) {
-      const video = document.getElementById('videoPlayer');
-      const titulo = document.getElementById('nombre-canal');
-      titulo.textContent = nombre;
-
-      if (url.endsWith('.m3u8')) {
-        if (Hls.isSupported()) {
-          if (window.hls) {
-            window.hls.destroy();
-          }
-          window.hls = new Hls();
-          window.hls.loadSource(url);
-          window.hls.attachMedia(video);
-          window.hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-          });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = url;
-        }
-
-        video.muted = true;
-        video.play().catch(err => {
-          console.warn('Autoplay fue bloqueado:', err);
-        });
-      } else {
-        const container = document.querySelector('.video-container');
-        container.innerHTML = `<iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
-        return;
-      }
-
-      const nav = document.querySelector('nav.canales');
-      if (window.innerWidth <= 768 && nav.classList.contains('visible')) {
-        nav.classList.add('hide-up');
-        setTimeout(() => {
-          nav.classList.remove('visible');
-          nav.classList.remove('hide-up');
-        }, 400);
-      }
-    }
-
-    function fullscreen() {
-  const container = document.querySelector('.video-container');
-  if (container.requestFullscreen) {
-    container.requestFullscreen();
-  } else if (container.webkitRequestFullscreen) {
-    container.webkitRequestFullscreen();
-  }
-}
-
-
-    function activarPiP() {
-      const video = document.getElementById('videoPlayer');
-      if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
-        if (document.pictureInPictureElement) {
-          document.exitPictureInPicture();
-        } else {
-          video.requestPictureInPicture()
-            .catch(error => console.error('Error al activar PiP:', error));
-        }
-      } else {
-        alert("Tu navegador no soporta modo ventana flotante.");
-      }
-    }
-
-    function toggleMenu() {
-      const nav = document.querySelector('nav.canales');
-      nav.classList.toggle('visible');
-    }
-
-    window.addEventListener('orientationchange', () => {
-      const video = document.getElementById('videoPlayer');
-      if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
-        if (video.requestFullscreen) {
-          video.requestFullscreen().then(() => {
-            if (screen.orientation && screen.orientation.lock) {
-              screen.orientation.lock('landscape').catch(err => {
-                console.warn('No se pudo bloquear orientación:', err);
-              });
-            }
-          });
-        }
-      }
-    });
-
-    function actualizarHora() {
-      const horaDiv = document.getElementById('hora-overlay');
-      if (!horaDiv) return;
-
-      const ahora = new Date();
-      const opciones = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-      const horaFormateada = ahora.toLocaleTimeString('es-PE', opciones);
-
-      horaDiv.textContent = horaFormateada;
-    }
-
-    setInterval(actualizarHora, 1000);
-    actualizarHora();
-
-    document.addEventListener('fullscreenchange', () => {
-  const overlay = document.querySelector('.overlay');
-  if (document.fullscreenElement) {
-    overlay.style.display = 'flex'; // mostrar en fullscreen
-  } else {
-    overlay.style.display = 'flex'; // también visible fuera de fullscreen (opcional)
-  }
-});
-
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
