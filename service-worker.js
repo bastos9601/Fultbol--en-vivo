@@ -1,12 +1,7 @@
-self.addEventListener('install', (e) => {
-  console.log('[Service Worker] Instalado');
-  self.skipWaiting();
+self.addEventListener('install', function(e) {
+  console.log('Service Worker instalado');
 });
 
-self.addEventListener('activate', (e) => {
-  console.log('[Service Worker] Activado');
-});
-
-self.addEventListener('fetch', (event) => {
-  // Puedes personalizar el manejo de recursos aquí
+self.addEventListener('fetch', function(event) {
+  // Opcional: puedes hacer cache aquí
 });

@@ -6,52 +6,47 @@
   <title>TV Digital en Vivo</title>
   <link rel="stylesheet" href="stile.css" />
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" />
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
 </head>
 
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('✅ Service Worker registrado'))
-        .catch(err => console.error('❌ Error al registrar el Service Worker:', err));
-    });
-  }
+<body>
+  <!-- Botón para instalar la app (invisible por defecto) -->
+<button id="btn-instalar" style="display: none;">Instalar Aplicación</button>
 
-  // Mostrar prompt de instalación
+<!-- Código para gestionar la instalación -->
+<script>
   let deferredPrompt;
+
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    document.getElementById('btn-instalar').style.display = 'block';
 
-    const installButton = document.createElement('button');
-    installButton.textContent = '📲 Instalar App';
-    installButton.style.position = 'fixed';
-    installButton.style.bottom = '20px';
-    installButton.style.right = '20px';
-    installButton.style.padding = '10px 20px';
-    installButton.style.zIndex = '1000';
-    installButton.style.background = '#000';
-    installButton.style.color = '#fff';
-    installButton.style.border = 'none';
-    installButton.style.borderRadius = '5px';
-    installButton.style.cursor = 'pointer';
-    document.body.appendChild(installButton);
-
-    installButton.addEventListener('click', async () => {
-      installButton.remove();
+    document.getElementById('btn-instalar').addEventListener('click', () => {
+      document.getElementById('btn-instalar').style.display = 'none';
       deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('✅ Usuario aceptó instalar');
-      } else {
-        console.log('❌ Usuario rechazó la instalación');
-      }
-      deferredPrompt = null;
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuario aceptó la instalación');
+        } else {
+          console.log('Usuario canceló la instalación');
+        }
+        deferredPrompt = null;
+      });
     });
   });
 </script>
+<!-- Registro del service worker -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('Service Worker registrado'))
+      .catch(err => console.error('Error al registrar Service Worker', err));
+  }
+</script>
 
-<body>
   <header>
     <h1>TV Digital en Vivo</h1>
     <link rel="manifest" href="manifest.json">
@@ -82,52 +77,52 @@
 
     <!-- Tarjetas de canales -->
     <section class="canales-grid">
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV',this)">
         <img src="/img/utv.png" alt="UTV" />
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV',this)">
         <img src="/img/america.png" alt="AMERICA" />
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV',this)">
         <img src="/img/PANAMERICANA.png" alt="PANAMERICANA" />
         </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA',this)">
         <img src="/img/LATINA.png" alt="LATINA" />
         </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV',this)">
         <img src="/img/ATV.png" alt="ATV" />
         </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES',this)">
         <img src="/img/FMH MOVIES.png" alt="FMH MOVIES">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS',this)">
         <img src="/img/FMH KIDS.png" alt="FMH KIDS">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB',this)">
         <img src="/img/BNB.png" alt="BNB">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA',this)">
         <img src="/img/RIBEREÑA.jpg" alt="RIBEREÑA">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV',this)">
         <img src="/img/UCAYALI TV.jpg" alt="UCAYALI TV">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO',this)">
         <img src="/img/CREO LATINO.png" alt="CREO LATINO TU CINE">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS,this')">
         <img src="/img/CREO KIDS.png" alt="CREO KIDS">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV',this)">
         <img src="/img/GLOBAL.png" alt="GLOBAL TV">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/animeOnegai/bitel/animeOnegai_ori_360p/chunks.m3u8', 'ANIME ONEGAI')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/animeOnegai/bitel/animeOnegai_ori_360p/chunks.m3u8', 'ANIME ONEGAI',this)">
         <img src="/img/ANIME ONEGAI.png" alt="ANIME ONEGAI">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/nativa/bitel/nativa_ori_480p/chunks.m3u8', 'NATIVA')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/nativa/bitel/nativa_ori_480p/chunks.m3u8', 'NATIVA',this)">
         <img src="/img/NATIVA.png" alt="NATIVA">
       </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/tvperu/bitel/tvperu_ori_480p/chunks.m3u8', 'TV PERU')">
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/tvperu/bitel/tvperu_ori_480p/chunks.m3u8', 'TV PERU',this)">
         <img src="/img/TV PERU.png" alt="TV PERU">
       </div>
     </section>
@@ -137,22 +132,28 @@
   const videoPlayer = document.getElementById("videoPlayer");
   const nombreCanal = document.getElementById("nombre-canal");
 
-  function cargarCanal(url, nombre) {
-    if (Hls.isSupported()) {
-      if (videoPlayer.hls) {
-        videoPlayer.hls.destroy(); // elimina cualquier instancia previa
-      }
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(videoPlayer);
-      videoPlayer.hls = hls;
-    } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
-      videoPlayer.src = url;
+  function cargarCanal(url, nombre, element) {
+  // Activar HLS
+  if (Hls.isSupported()) {
+    if (videoPlayer.hls) {
+      videoPlayer.hls.destroy();
     }
-
-    nombreCanal.textContent = nombre;
-    videoPlayer.play(); // fuerza reproducción
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(videoPlayer);
+    videoPlayer.hls = hls;
+  } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
+    videoPlayer.src = url;
   }
+
+  nombreCanal.textContent = nombre;
+  videoPlayer.play();
+
+  // Añadir clase activa visual
+  document.querySelectorAll('.card').forEach(card => card.classList.remove('activo'));
+  element.classList.add('activo');
+}
+
 
   function fullscreen() {
     if (videoPlayer.requestFullscreen) {

@@ -83,6 +83,11 @@ header {
   object-fit: contain;
   margin-bottom: 8px;
 }
+.card.activo {
+  border: 3px solid #00ff99;
+  transform: scale(1.05);
+  transition: transform 0.2s, border 0.2s;
+}
 
 
 
