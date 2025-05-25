@@ -3,69 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fútbol Peruano en Vivo</title>
+  <title>TV DIGITAL EN VIVO</title>
   <link rel="stylesheet" href="stile.css" />
   <link rel="manifest" href="manifest.json" />
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    .video-container video:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+    }
+  </style>
 </head>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(reg => console.log('Service Worker registrado', reg))
-      .catch(err => console.error('Error al registrar SW', err));
-  }
-</script>
-
 <body>
   <header>
     <div class="top-bar">
-      <div class="logo">⚽ Fútbol Perú</div>
+      <div class="logo"> TV DIGITAL EN VIVO</div>
       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     </div>
     <nav class="canales">
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=liga1max')">
-    <img src="/img/liga-max.webp" alt="Liga1 Max">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=movistar')">
-    <img src="/img/movistar depor.webp" alt="M Deportes"> 
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=golperu')">
-    <img src="/img/golper.webp" alt="GolPerú">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports')">
-    <img src="/img/directv sport.webp" alt="Directv Sports">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports2')">
-    <img src="/img/dsports_2.webp" alt="Directv Sports 2">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=dsports+')">
-    <img src="/img/directv +.webp" alt="Directv Sports +">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn')">
-    <img src="/img/espin.webp" alt="ESPN">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn2')">
-    <img src="/img/espin2.webp" alt="ESPN2">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=espn3')">
-    <img src="/img/espin3.webp" alt="ESPN3">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports')">
-    <img src="/img/fox sport.webp" alt="Fox Sports">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports2')">
-    <img src="/img/fox espor 2.webp" alt="Fox Sports 2">
-  </a>
-  <a onclick="cargarCanal('https://la12hd.com/vivo/canal.php?stream=foxsports3')">
-    <img src="/img/fox sport 3.webp" alt="Fox Sports 3">
-  </a>
-</nav>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8')">UTV</a>
+      <a onclick="cargarCanal('https://live-evg4.tv360.bitel.com.pe/oQNeTbDAAY1z-3ZZm8mwiA/1748226630/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8')">AMÉRICA TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8')">PANAMERICANA TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8')">LATINA</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8')">ATV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8')">FMH MOVIES</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8')">FMH KIDS</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8')">BNB</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8')">RIBEREÑA</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8')">UCAYALI TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8')">CREO LATINO</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8')">CREO LATINO KIDS</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8')">GLOBAL TV</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Disfruta del fútbol en vivo</h1>
-      <p>Transmisiones en directo de tus canales deportivos favoritos.</p>
+      <h1>Disfruta de tv  en vivo</h1>
+      <p>Transmisiones en directo de tus canales  favoritos.</p>
     </section>
 
     <div class="video-container">
@@ -74,15 +50,20 @@
 
     <div class="controls">
       <button onclick="fullscreen()">Pantalla Completa</button>
+      <button onclick="activarPiP()">Ventana Flotante</button>
     </div>
   </main>
 
   <footer>
-    <p>© 2025 Fútbol Libres Perú - Transmisiones en vivo</p>
+    <p>© 2025 TV DIGITAL EN VIVO - Transmisiones en vivo</p>
   </footer>
 
   <script>
-    const video = document.getElementById('videoPlayer');
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registrado', reg))
+        .catch(err => console.error('Error al registrar SW', err));
+    }
 
     function cargarCanal(url) {
       const container = document.querySelector('.video-container');
@@ -112,7 +93,6 @@
           <iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
       }
 
-      // Ocultar menú en móviles con animación hacia arriba
       const nav = document.querySelector('nav.canales');
       if (window.innerWidth <= 768 && nav.classList.contains('visible')) {
         nav.classList.add('hide-up');
@@ -132,10 +112,39 @@
       }
     }
 
+    function activarPiP() {
+      const video = document.getElementById('videoPlayer');
+      if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
+        if (document.pictureInPictureElement) {
+          document.exitPictureInPicture();
+        } else {
+          video.requestPictureInPicture()
+            .catch(error => console.error('Error al activar PiP:', error));
+        }
+      } else {
+        alert("Tu navegador no soporta modo ventana flotante.");
+      }
+    }
+
     function toggleMenu() {
       const nav = document.querySelector('nav.canales');
       nav.classList.toggle('visible');
     }
+
+    window.addEventListener('orientationchange', () => {
+      const video = document.getElementById('videoPlayer');
+      if (window.innerWidth <= 768 && window.innerHeight > window.innerWidth) {
+        if (video.requestFullscreen) {
+          video.requestFullscreen().then(() => {
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock('landscape').catch(err => {
+                console.warn('No se pudo bloquear orientación:', err);
+              });
+            }
+          });
+        }
+      }
+    });
   </script>
 </body>
 </html>
