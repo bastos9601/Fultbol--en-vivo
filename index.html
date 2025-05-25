@@ -13,38 +13,99 @@
       height: 100vh;
       object-fit: contain;
     }
+    #nombre-canal {
+      text-align: center;
+      font-size: 1.4em;
+      margin: 10px 0;
+      color: #1db954;
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <div class="top-bar">
-      <div class="logo"> TV DIGITAL EN VIVO</div>
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="logo" aria-label="Logo TV Digital en Vivo" role="img">
+      <svg width="180" height="50" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" >
+        <style>
+          .text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            fill: #1db954;
+            letter-spacing: 1px;
+          }
+          .highlight {
+            fill: #fff;
+          }
+          .play-icon {
+            fill: #1db954;
+            transition: fill 0.3s ease;
+            cursor: pointer;
+          }
+          .play-icon:hover {
+            fill: #17a64a;
+          }
+        </style>
+        <polygon class="play-icon" points="10,15 10,45 40,30" />
+        <text class="text" x="50" y="28">TV DIGITAL</text>
+        <text class="text highlight" x="50" y="50">EN VIVO</text>
+      </svg>
     </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
     <nav class="canales">
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8')">UTV</a>
-      <a onclick="cargarCanal('https://live-evg4.tv360.bitel.com.pe/oQNeTbDAAY1z-3ZZm8mwiA/1748226630/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8')">AMÉRICA TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8')">PANAMERICANA TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8')">LATINA</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8')">ATV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8')">FMH MOVIES</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8')">FMH KIDS</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8')">BNB</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8')">RIBEREÑA</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8')">UCAYALI TV</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8')">CREO LATINO</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8')">CREO LATINO KIDS</a>
-      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8')">GLOBAL TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV')">UTV</a>
+      <a onclick="cargarCanal('https://live-evg4.tv360.bitel.com.pe/oQNeTbDAAY1z-3ZZm8mwiA/1748226630/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV')">AMÉRICA TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV')">PANAMERICANA TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA')">LATINA</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV')">ATV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES')">FMH MOVIES</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS')">FMH KIDS</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB')">BNB</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA')">RIBEREÑA</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV')">UCAYALI TV</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO')">CREO LATINO</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS')">CREO LATINO KIDS</a>
+      <a onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV')">GLOBAL TV</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Disfruta de tv  en vivo</h1>
-      <p>Transmisiones en directo de tus canales  favoritos.</p>
+      <h1>Disfruta de TV en vivo</h1>
+      <p>Transmisiones en directo de tus canales favoritos.</p>
     </section>
 
+    <h2 id="nombre-canal">Selecciona un canal</h2>
+
     <div class="video-container">
+      <div class="overlay">
+        <div class="logo-overlay" aria-label="Logo TV Digital en Vivo" role="img">
+          <svg width="120" height="33" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+            <style>
+              .text {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 700;
+                font-size: 12px;
+                fill: #1db954;
+                letter-spacing: 1px;
+              }
+              .highlight {
+                fill: #fff;
+              }
+              .play-icon {
+                fill: #1db954;
+              }
+            </style>
+            <polygon class="play-icon" points="10,15 10,45 40,30" />
+            <text class="text" x="50" y="28">TV DIGITAL</text>
+            <text class="text highlight" x="50" y="50">EN VIVO</text>
+          </svg>
+        </div>
+        <div id="hora-overlay" class="hora-overlay"></div>
+      </div>
       <video id="videoPlayer" controls autoplay playsinline></video>
     </div>
 
@@ -65,18 +126,20 @@
         .catch(err => console.error('Error al registrar SW', err));
     }
 
-    function cargarCanal(url) {
-      const container = document.querySelector('.video-container');
+    function cargarCanal(url, nombre) {
+      const video = document.getElementById('videoPlayer');
+      const titulo = document.getElementById('nombre-canal');
+      titulo.textContent = nombre;
 
       if (url.endsWith('.m3u8')) {
-        container.innerHTML = `<video id="videoPlayer" controls autoplay playsinline muted></video>`;
-        const video = document.getElementById('videoPlayer');
-
         if (Hls.isSupported()) {
-          const hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          if (window.hls) {
+            window.hls.destroy();
+          }
+          window.hls = new Hls();
+          window.hls.loadSource(url);
+          window.hls.attachMedia(video);
+          window.hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play();
           });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -87,10 +150,10 @@
         video.play().catch(err => {
           console.warn('Autoplay fue bloqueado:', err);
         });
-
       } else {
-        container.innerHTML = `
-          <iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
+        const container = document.querySelector('.video-container');
+        container.innerHTML = `<iframe src="${url}&autoplay=1" allowfullscreen width="100%" height="500px" frameborder="0" allow="autoplay"></iframe>`;
+        return;
       }
 
       const nav = document.querySelector('nav.canales');
@@ -145,6 +208,20 @@
         }
       }
     });
+
+    function actualizarHora() {
+      const horaDiv = document.getElementById('hora-overlay');
+      if (!horaDiv) return;
+
+      const ahora = new Date();
+      const opciones = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+      const horaFormateada = ahora.toLocaleTimeString('es-PE', opciones);
+
+      horaDiv.textContent = horaFormateada;
+    }
+
+    setInterval(actualizarHora, 1000);
+    actualizarHora();
   </script>
 </body>
 </html>
