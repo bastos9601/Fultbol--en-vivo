@@ -1,19 +1,19 @@
 {
-  "name": "TV DIGITAL EN VIVO",
-  "short_name": "TV DIGITAL EN VIVO",
-  "start_url": ".",
+  "name": "TV Digital en Vivo",
+  "short_name": "TV Digital",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#1d1d1d",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/833/833472.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icon-512.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/833/833472.png",
       "sizes": "512x512",
       "type": "image/png"
     }

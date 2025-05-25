@@ -5,12 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TV Digital en Vivo</title>
   <link rel="stylesheet" href="stile.css" />
-  <link rel="icon" type="/img/favicon.ico" href="logo.svg" />
-
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" />
 </head>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker registrado'))
+        .catch(err => console.error('❌ Error al registrar el Service Worker:', err));
+    });
+  }
+
+  // Mostrar prompt de instalación
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    const installButton = document.createElement('button');
+    installButton.textContent = '📲 Instalar App';
+    installButton.style.position = 'fixed';
+    installButton.style.bottom = '20px';
+    installButton.style.right = '20px';
+    installButton.style.padding = '10px 20px';
+    installButton.style.zIndex = '1000';
+    installButton.style.background = '#000';
+    installButton.style.color = '#fff';
+    installButton.style.border = 'none';
+    installButton.style.borderRadius = '5px';
+    installButton.style.cursor = 'pointer';
+    document.body.appendChild(installButton);
+
+    installButton.addEventListener('click', async () => {
+      installButton.remove();
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('✅ Usuario aceptó instalar');
+      } else {
+        console.log('❌ Usuario rechazó la instalación');
+      }
+      deferredPrompt = null;
+    });
+  });
+</script>
+
 <body>
   <header>
     <h1>TV Digital en Vivo</h1>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
   </header>
 
   <main>
