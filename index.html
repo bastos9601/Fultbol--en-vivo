@@ -59,6 +59,8 @@
     <section class="player-section">
       <h2 id="nombre-canal">Selecciona un canal</h2>
       <div class="video-container">
+        <div class="border-left"></div>
+        <div class="border-right"></div>
         <div class="overlay">
           <div class="logo-overlay" aria-label="Logo TV Digital en Vivo" role="img">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="white" width="50" height="50">
@@ -68,6 +70,10 @@
           <div id="hora-overlay" class="hora-overlay"></div>
         </div>
         <video id="videoPlayer" controls autoplay playsinline></video>
+        <button id="cambiarCanalBtn" onclick="salirDePantallaCompleta()" style="display:none;" class="floating-button">
+  Elegir otro canal
+</button>
+
       </div>
       <div class="controls">
         <button onclick="fullscreen()">Pantalla Completa</button>
@@ -77,6 +83,7 @@
 
     <!-- Tarjetas de canales -->
     <section class="canales-grid">
+      
       <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV',this)">
         <img src="/img/utv.png" alt="UTV" />
       </div>
@@ -164,6 +171,39 @@
       videoPlayer.msRequestFullscreen();
     }
   }
+  
+  document.addEventListener('fullscreenchange', toggleBotonCambiarCanal);
+document.addEventListener('webkitfullscreenchange', toggleBotonCambiarCanal); // Safari
+document.addEventListener('mozfullscreenchange', toggleBotonCambiarCanal); // Firefox
+document.addEventListener('MSFullscreenChange', toggleBotonCambiarCanal); // IE/Edge
+
+function toggleBotonCambiarCanal() {
+  const cambiarBtn = document.getElementById('cambiarCanalBtn');
+  const isFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement;
+
+  if (isFullscreen) {
+    cambiarBtn.style.display = 'block';
+  } else {
+    cambiarBtn.style.display = 'none';
+  }
+}
+
+function salirDePantallaCompleta() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  }
+}
+
 
   function activarPiP() {
     if (document.pictureInPictureEnabled && !videoPlayer.disablePictureInPicture) {
@@ -179,6 +219,18 @@
     const minutos = ahora.getMinutes().toString().padStart(2, '0');
     horaOverlay.textContent = `${horas}:${minutos}`;
   }, 1000);
+
+  // Detectar cambios en pantalla completa
+document.addEventListener("fullscreenchange", () => {
+  const btn = document.getElementById("cambiarCanalBtn");
+  if (document.fullscreenElement) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+});
+
+
 </script>
 
 <!-- Asegúrate de incluir HLS.js desde CDN -->

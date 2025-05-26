@@ -53,6 +53,22 @@ header {
   border-radius: 4px;
   cursor: pointer;
 }
+.floating-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
 
 .canales-grid {
   display: grid;
@@ -139,9 +155,47 @@ main {
   max-width: 100%;
   margin: 20px auto;
   background-color: #000;
-  border: 2px solid #1db954;
   border-radius: 8px;
   overflow: hidden;
+}
+/* Línea animada que recorre el borde */
+.video-container::before,
+.video-container::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(to right, transparent, #0ff, transparent);
+  width: 100%;
+  height: 2px;
+  top: 0;
+  left: -100%;
+  animation: moveBorderTop 2s linear infinite, colorShift 4s linear infinite;
+}
+
+.video-container::after {
+  top: auto;
+  bottom: 0;
+  animation: moveBorderBottom 2s linear infinite 1s, colorShift 4s linear infinite;
+}
+
+.video-container .border-left,
+.video-container .border-right {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #0ff, transparent);
+}
+
+.video-container .border-left {
+  top: -100%;
+  left: 0;
+  animation: moveBorderLeft 2s linear infinite 0.5s, colorShiftVertical 4s linear infinite;
+}
+
+.video-container .border-right {
+  top: 100%;
+  right: 0;
+  animation: moveBorderRight 2s linear infinite 1.5s, colorShiftVertical 4s linear infinite;
 }
 
 .video-container video {
@@ -227,4 +281,41 @@ footer {
       transform: translateY(-100%);
     }
   }
+}
+/* Animaciones de movimiento */
+@keyframes moveBorderTop {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes moveBorderBottom {
+  0% { left: 100%; }
+  100% { left: -100%; }
+}
+
+@keyframes moveBorderLeft {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+@keyframes moveBorderRight {
+  0% { top: 100%; }
+  100% { top: -100%; }
+}
+
+/* Animaciones de cambio de color */
+@keyframes colorShift {
+  0%   { background: linear-gradient(to right, transparent, #0ff, transparent); }
+  25%  { background: linear-gradient(to right, transparent, #f0f, transparent); }
+  50%  { background: linear-gradient(to right, transparent, #0f0, transparent); }
+  75%  { background: linear-gradient(to right, transparent, #ff0, transparent); }
+  100% { background: linear-gradient(to right, transparent, #0ff, transparent); }
+}
+
+@keyframes colorShiftVertical {
+  0%   { background: linear-gradient(to bottom, transparent, #0ff, transparent); }
+  25%  { background: linear-gradient(to bottom, transparent, #f0f, transparent); }
+  50%  { background: linear-gradient(to bottom, transparent, #0f0, transparent); }
+  75%  { background: linear-gradient(to bottom, transparent, #ff0, transparent); }
+  100% { background: linear-gradient(to bottom, transparent, #0ff, transparent); }
 }
