@@ -14,6 +14,17 @@
 <body>
   <!-- Botón para instalar la app (invisible por defecto) -->
 <button id="btn-instalar" style="display: none;">Instalar Aplicación</button>
+<script>
+  let visitas = localStorage.getItem('contadorVisitas') || 0;
+  visitas++;
+  localStorage.setItem('contadorVisitas', visitas);
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('contador-visitas').innerText = "Visitas (en este navegador): " + visitas;
+  });
+</script>
+
+<div id="contador-visitas" style="color:white; font-weight:bold; padding: 10px;"></div>
+
 
 <!-- Código para gestionar la instalación -->
 <script>
