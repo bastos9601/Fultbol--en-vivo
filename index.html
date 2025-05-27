@@ -90,78 +90,15 @@
         <button onclick="fullscreen()">Pantalla Completa</button>
         <button onclick="activarPiP()">Ventana Flotante</button>
       </div>
+      <button id="mostrarCanalesBtn" onclick="alternarCanales()">Mostrar canales</button>
+
+
     </section>
 
     <!-- Tarjetas de canales -->
     <section class="canales-grid">
       
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', 'UTV',this)">
-        <img src="/img/utv.png" alt="UTV" />
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', 'AMÉRICA TV',this)">
-        <img src="/img/america.png" alt="AMERICA" />
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', 'PANAMERICANA TV',this)">
-        <img src="/img/PANAMERICANA.png" alt="PANAMERICANA" />
-        </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', 'LATINA',this)">
-        <img src="/img/LATINA.png" alt="LATINA" />
-        </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', 'ATV',this)">
-        <img src="/img/ATV.png" alt="ATV" />
-        </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', 'FMH MOVIES',this)">
-        <img src="/img/FMH MOVIES.png" alt="FMH MOVIES">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', 'FMH KIDS',this)">
-        <img src="/img/FMH KIDS.png" alt="FMH KIDS">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', 'BNB',this)">
-        <img src="/img/BNB.png" alt="BNB">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', 'RIBEREÑA',this)">
-        <img src="/img/RIBEREÑA.jpg" alt="RIBEREÑA">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', 'UCAYALI TV',this)">
-        <img src="/img/UCAYALI TV.jpg" alt="UCAYALI TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', 'CREO LATINO',this)">
-        <img src="/img/CREO LATINO.png" alt="CREO LATINO TU CINE">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', 'CREO LATINO KIDS,this')">
-        <img src="/img/CREO KIDS.png" alt="CREO KIDS">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', 'GLOBAL TV',this)">
-        <img src="/img/GLOBAL.png" alt="GLOBAL TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/animeOnegai/bitel/animeOnegai_ori_360p/chunks.m3u8', 'ANIME ONEGAI',this)">
-        <img src="/img/ANIME ONEGAI.png" alt="ANIME ONEGAI">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/nativa/bitel/nativa_ori_480p/chunks.m3u8', 'NATIVA',this)">
-        <img src="/img/NATIVA.png" alt="NATIVA">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/tvperu/bitel/tvperu_ori_480p/chunks.m3u8', 'TV PERU',this)">
-        <img src="/img/TV PERU.png" alt="TV PERU">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/willax/bitel/willax_ori_480p/chunks.m3u8', 'WILLAX TV',this)">
-        <img src="/img/willax.png" alt="WILLAX TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/exitosa/bitel/exitosa_ori_480p/chunks.m3u8', 'EXITOSA TV',this)">
-        <img src="/img/EXITOSA.png" alt="EXITOSA TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/cineclub/chunks.m3u8', 'CINE CLUB TV',this)">
-        <img src="/img/CINE CLUB.png" alt="CINE CLUB TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/cnctv/chunks.m3u8', 'CNC TV',this)">
-        <img src="/img/CNC TV.jpg" alt="CNC TV">
-      </div>
-      <div class="card" onclick="cargarCanal('https://agvyby.fubohd.com/liga1max/mono.m3u8?token=73af81cffa26ce23694a1893f194cd400b0c6475-12-1748341051-1748323051', 'LIGA 1 MAX',this)">
-        <img src="/img/liga-max.webp" alt="LIGA 1 MAX">
-      </div>
-      <div class="card" onclick="cargarCanal('https://qzv4jmsc.fubohd.com/golperu/mono.m3u8?token=c67e3e185372d367efe9c483b72c59b07b335433-37-1748341570-1748323570', 'GOL PERU',this)">
-        <img src="/img/golper.webp" alt="GOL PERU">
-      </div>
-    </section>
+      
   </main>
 
   <script>
@@ -265,6 +202,69 @@ document.addEventListener("fullscreenchange", () => {
     btn.style.display = "none";
   }
 });
+let canalesOcultos = [
+  // Los canales adicionales
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/utv/chunks.m3u8', nombre: 'UTV', imgSrc: '/img/utv.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/americatv/bitel/americatv_ori_480p/chunks.m3u8', nombre: 'AMERICA TV', imgSrc: '/img/america.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/panamericana/bitel/panamericana_ori_480p/chunks.m3u8', nombre: 'PANAMERICANA TV', imgSrc: '/img/PANAMERICANA.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/latina/bitel/latina_ori_480p/chunks.m3u8', nombre: 'LATINA TV', imgSrc: '/img/LATINA.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/atv/bitel/atv_ori_480p/chunks.m3u8', nombre: 'ATV', imgSrc: '/img/ATV.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/fmhmovies/chunks.m3u8', nombre: 'FMH MOVIES', imgSrc: '/img/FMH MOVIES.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/fmhkids/chunks.m3u8', nombre: 'FMH KIDS', imgSrc: '/img/FMH KIDS.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/bnb/chunks.m3u8', nombre: 'BNB', imgSrc: '/img/BNB.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/ribere%C3%B1a/chunks.m3u8', nombre: 'RIBEREÑA', imgSrc: '/img/RIBEREÑA.jpg' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/creolatino/chunks.m3u8', nombre: 'CREO LATINO', imgSrc: '/img/CREO LATINO.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/creokids/chunks.m3u8', nombre: 'CREO LATINO KIDS', imgSrc: '/img/CREO KIDS.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/global/bitel/global_ori_480p/chunks.m3u8', nombre: 'GLOBAL TV', imgSrc: '/img/GLOBAL.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/animeOnegai/bitel/animeOnegai_ori_360p/chunks.m3u8', nombre: 'ANIME ONEGAI', imgSrc: '/img/ANIME ONEGAI.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/nativa/bitel/nativa_ori_480p/chunks.m3u8', nombre: 'NATIVA', imgSrc: '/img/NATIVA.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/tvperu/bitel/tvperu_ori_480p/chunks.m3u8', nombre: 'TV PERU', imgSrc: '/img/TV PERU.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/willax/bitel/willax_ori_480p/chunks.m3u8', nombre: 'WILLAX TV', imgSrc: '/img/willax.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/exitosa/bitel/exitosa_ori_480p/chunks.m3u8', nombre: 'EXITOSA TV', imgSrc: '/img/EXITOSA.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/cineclub/chunks.m3u8', nombre: 'cINE cLUB TV', imgSrc: '/img/CINE CLUB.png' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/cnctv/chunks.m3u8', nombre: 'CNC TV', imgSrc: '/img/CNC TV.jpg' },
+  { url: 'https://live-evg25.tv360.bitel.com.pe/bitel/ucayalitv/chunks.m3u8', nombre: 'UCAYALI TV', imgSrc: '/img/UCAYALI TV.jpg' },
+  // Agrega más canales aquí
+];
+
+let canalesMostrados = false;
+
+function alternarCanales() {
+  const contenedorCanales = document.querySelector('.canales-grid');
+  const boton = document.getElementById('mostrarCanalesBtn');
+  
+  if (!canalesMostrados) {
+    // Mostrar los canales adicionales
+    canalesOcultos.forEach(canal => {
+      const nuevaCard = document.createElement('div');
+      nuevaCard.classList.add('card');
+      nuevaCard.innerHTML = `
+        <img src="${canal.imgSrc}" alt="${canal.nombre}" />
+      `;
+      nuevaCard.onclick = () => cargarCanal(canal.url, canal.nombre, nuevaCard);
+      contenedorCanales.appendChild(nuevaCard);
+    });
+
+    // Cambiar el texto del botón
+    boton.textContent = "Ocultar canales adicionales";
+  } else {
+    // Ocultar los canales adicionales
+    const tarjetas = document.querySelectorAll('.canales-grid .card');
+    tarjetas.forEach(card => {
+      contenedorCanales.removeChild(card);
+    });
+
+    // Cambiar el texto del botón
+    boton.textContent = "Mostrar más canales";
+  }
+
+  // Alternar el estado de los canales mostrados
+  canalesMostrados = !canalesMostrados;
+}
+
+
+
+
 
 
 </script>
