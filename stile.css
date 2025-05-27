@@ -10,7 +10,7 @@ body {
 
 header {
   background-color: #1a1a1a;
-  padding: 10px 20px;
+  padding: 0px 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -19,24 +19,25 @@ header {
   top: 0;
   z-index: 10;
   border-bottom: 1px solid #2a2a2a;
+  
+}
+h1 {
+  color: #fff;  /* Cambia el color del texto a blanco para que sea visible */
+  margin: 0;  /* Elimina márgenes para que esté centrado correctamente */
 }
 
 .logo svg {
   height: 40px;
 }
 
-.player-section {
-  padding: 20px;
-  background-color: #000;
-  color: white;
-}
 
 .video-container {
   position: relative;
-  width: 100%;
-  max-width: 800px;
+  width: 80%; /* Cambié el ancho a 80% para hacerlo más pequeño */
+  max-width: 1000px; /* Ajusté el tamaño máximo a 600px */
   margin: 0 auto;
 }
+
 
 .controls {
   text-align: center;
@@ -71,11 +72,12 @@ header {
 
 
 .canales-grid {
+  display: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 16px;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -105,10 +107,18 @@ header {
   transition: transform 0.2s, border 0.2s;
 }
 
-
-
-
-
+#mostrarCanalesBtn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: #00b300;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 1000;
+}
 
 nav.canales {
   display: flex;
@@ -150,14 +160,6 @@ main {
   color: #ccc;
 }
 
-.video-container {
-  position: relative;
-  max-width: 100%;
-  margin: 20px auto;
-  background-color: #000;
-  border-radius: 8px;
-  overflow: hidden;
-}
 /* Línea animada que recorre el borde */
 .video-container::before,
 .video-container::after {

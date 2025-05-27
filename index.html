@@ -143,6 +143,24 @@
       <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/tvperu/bitel/tvperu_ori_480p/chunks.m3u8', 'TV PERU',this)">
         <img src="/img/TV PERU.png" alt="TV PERU">
       </div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/willax/bitel/willax_ori_480p/chunks.m3u8', 'WILLAX TV',this)">
+        <img src="/img/willax.png" alt="WILLAX TV">
+      </div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/exitosa/bitel/exitosa_ori_480p/chunks.m3u8', 'EXITOSA TV',this)">
+        <img src="/img/EXITOSA.png" alt="EXITOSA TV">
+      </div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/cineclub/chunks.m3u8', 'CINE CLUB TV',this)">
+        <img src="/img/CINE CLUB.png" alt="CINE CLUB TV">
+      </div>
+      <div class="card" onclick="cargarCanal('https://live-evg25.tv360.bitel.com.pe/bitel/cnctv/chunks.m3u8', 'CNC TV',this)">
+        <img src="/img/CNC TV.jpg" alt="CNC TV">
+      </div>
+      <div class="card" onclick="cargarCanal('https://agvyby.fubohd.com/liga1max/mono.m3u8?token=73af81cffa26ce23694a1893f194cd400b0c6475-12-1748341051-1748323051', 'LIGA 1 MAX',this)">
+        <img src="/img/liga-max.webp" alt="LIGA 1 MAX">
+      </div>
+      <div class="card" onclick="cargarCanal('https://qzv4jmsc.fubohd.com/golperu/mono.m3u8?token=c67e3e185372d367efe9c483b72c59b07b335433-37-1748341570-1748323570', 'GOL PERU',this)">
+        <img src="/img/golper.webp" alt="GOL PERU">
+      </div>
     </section>
   </main>
 
@@ -164,13 +182,20 @@
     videoPlayer.src = url;
   }
 
-  nombreCanal.textContent = nombre;
+  nombreCanal.textContent = `Canal seleccionado: ${nombre}`;
   videoPlayer.play();
 
   // Añadir clase activa visual
   document.querySelectorAll('.card').forEach(card => card.classList.remove('activo'));
   element.classList.add('activo');
+
+  // Desplazar al contenedor de video
+  document.querySelector('.video-container').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
 }
+
 
 
   function fullscreen() {
